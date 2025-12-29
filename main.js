@@ -692,7 +692,9 @@ bot.command("menu", async (ctx) => {
     await ctx.deleteMessage(msg.message_id);
     const teks = `
 \`\`\`ωнατєяϲοиτяοℓ
-
+𝗪𝗵𝗮𝘁𝗲𝗿 𝗕𝗹𝘂𝗲 
+𝗩𝗲𝗿𝘀𝗶𝗼𝗻 6.8
+𝗖𝗿𝗲𝗮𝘁𝗲𝗱 𝗕𝘆 : 𝗝𝗮𝗿𝘆 & 𝗠𝗮𝗼𝘂
 ☰ — τοοℓѕ ༈ αϲϲєѕ —
 ⊹ /whater <pesan> (all akses)
 ⊹ /gacha (all akses)
