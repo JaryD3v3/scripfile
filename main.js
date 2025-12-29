@@ -295,7 +295,7 @@ console.clear();
 » Information:
   Developer: JARY
   Name Scrip: Whater Blue
-  Version: X
+  Version: 6.8
   Status: Vvip
   `))
   console.log(chalk.bold.red(`Scrip Siap Tempur`))
@@ -366,7 +366,7 @@ sock.ev.on('connection.update', async (update) => {
 » Information:
   Developer: JARY
   Name Scrip: WhaterBlue
-  Version: 5.1
+  Version: 6.8
   Status: Sender Connected
   `));
         try {
@@ -597,7 +597,7 @@ Hello welcome to the Water Blue script specially designed to crash WhatsApp This
 ─────────────────────
 ☰「 ɪɴғᴏʀᴍᴀsɪ ⊹ 𝑾ɦαƭεɾ 」
 ヤ ՇяєαԵօя : @JarySudo2 X @maoumods
-ヤ ѵєяsíοи : X
+ヤ ѵєяsíοи : 6.8
 ヤ ℒαиgυαgє : 𝙅𝙖𝙫𝙖𝙨𝙘𝙧𝙞𝙥𝙩 
 ヤ sτατυs : 𝙑𝙫𝙞𝙥𝘽𝙪𝙮𝙊𝙣𝙡𝙮
 ╘═———————---———————═⬡
@@ -633,7 +633,7 @@ INFO :
 ─────────────────────
 ☰「 ɪɴғᴏʀᴍᴀsɪ ⊹ 𝑾ɦαƭεɾ 」
 ヤ ՇяєαԵօя : @JarySudo2
-ヤ ѵєяsíοи : X 
+ヤ ѵєяsíοи : 6.8
 ヤ ℒαиgυαgє : 𝙅𝙖𝙫𝙖𝙨𝙘𝙧𝙞𝙥𝙩 
 ヤ sτατυs : 𝙑𝙫𝙞𝙥𝘽𝙪𝙮𝙊𝙣𝙡𝙮
 ╘═———————---———————═⬡
@@ -692,6 +692,7 @@ bot.command("menu", async (ctx) => {
     await ctx.deleteMessage(msg.message_id);
     const teks = `
 \`\`\`ωнατєяϲοиτяοℓ
+
 ☰ — τοοℓѕ ༈ αϲϲєѕ —
 ⊹ /whater <pesan> (all akses)
 ⊹ /gacha (all akses)
